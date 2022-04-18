@@ -39,15 +39,15 @@ const Product = () => {
                         <span className={styles.number}>Large</span>
                     </div>
                 </div>
-                <h3 className={styles.choose}>Choose additional ingridients</h3>
-                <div className={styles.ingridients}>
+                <h3 className={styles.choose}>Choose additional ingredients</h3>
+                <div className={styles.ingredients}>
                     <div className={styles.option}>
                         <input
                             className={styles.checkbox}
                             type="checkbox"
                             id="double"
                             name="double" />
-                        <label htmlFor="double">Double Ingridients</label>
+                        <label htmlFor="double">Double Ingredients</label>
                     </div>
                     <div className={styles.option}>
                         <input

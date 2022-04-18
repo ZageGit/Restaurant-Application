@@ -34,3 +34,19 @@
     color: rgb(211, 211, 211);
   }
   
+  @media screen and (max-width:480px) {
+
+.item{
+    flex-direction: column;
+}
+.container{
+    height: auto;
+    text-align: center;
+}
+.title{
+    font-size: 30px;
+}
+.text{
+    font-size: 20px;
+}
+}
