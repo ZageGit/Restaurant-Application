@@ -3,9 +3,9 @@ import Image from "next/image"
 const Footer = () => {
     return (
         <div className={styles.container}>
-            <div className={styles.item}>
+            {/* <div className={styles.item}>
                 <Image src="/img/bg.png" layout="fill" alt="" />
-            </div>
+            </div> */}
             <div className={styles.item}>
                 <div className={styles.card}>
                     <h2 className={styles.motto}>
