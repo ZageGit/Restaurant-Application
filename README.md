@@ -1,2 +1,8 @@
 # Restaurant Application
- Learning React, Next.JS
+ In this Application i am learning and using following technologies
+ - React
+ - Next.JS
+ - Redux
+ - MongoDB
+ - Axios
+
