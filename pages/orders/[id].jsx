@@ -6,11 +6,11 @@ import Image from "next/image";
 
 const Order = () => {
     const status = 0;
-const statusClass = (index)=>{
-    if(index-status <1)return styles.done
-    if(index-status === 1)return styles.inProgress
-    if(index-status >1)return styles.undone
-}
+    const statusClass = (index) => {
+        if (index - status < 1) return styles.done
+        if (index - status === 1) return styles.inProgress
+        if (index - status > 1) return styles.undone
+    }
 
 
     return (
@@ -18,27 +18,32 @@ const statusClass = (index)=>{
         <div className={styles.container}>
             <div className={styles.left}>
                 <div className={styles.row}>
+
                     <table className={styles.table}>
-                        <tr className={styles.trTitle}>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Address</th>
-                            <th>Total</th>
-                        </tr>
-                        <tr className={styles.tr}>
-                            <td >
-                                <span className={styles.id}>189489498498</span>
-                            </td>
-                            <td>
-                                <span className={styles.name}>Johannes Zarre</span>
-                            </td>
-                            <td>
-                                <span className={styles.address}>Tempelgasse 7, Vienna</span>
-                            </td>
-                            <td>
-                                <span className={styles.total}>€25.90</span>
-                            </td>
-                        </tr>
+                        <tbody>
+                            <tr className={styles.trTitle}>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Address</th>
+                                <th>Total</th>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr className={styles.tr}>
+                                <td >
+                                    <span className={styles.id}>189489498498</span>
+                                </td>
+                                <td>
+                                    <span className={styles.name}>Johannes Zarre</span>
+                                </td>
+                                <td>
+                                    <span className={styles.address}>Tempelgasse 7, Vienna</span>
+                                </td>
+                                <td>
+                                    <span className={styles.total}>€25.90</span>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div className={styles.row}>

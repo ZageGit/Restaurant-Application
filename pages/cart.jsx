@@ -7,7 +7,8 @@ import {
     PayPalButtons,
     usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
-
+import {useRouter} from "next/router"
+import axios from "axios";
 
 
 
@@ -19,6 +20,20 @@ const Cart = () => {
     const amount = cart.total;
     const currency = "EUR";
     const style = { layout: "vertical" };
+    const router = useRouter();
+
+
+    const createOrder = async (data) => {
+        try{
+            const res = await axios.post("http://localhost:3000/api/orders", data)
+            res.status === 201 && router.push("/orders/"+res.data._id)
+            dispatch(reset);
+
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
 
 
 
@@ -154,7 +169,7 @@ const Cart = () => {
                             <PayPalScriptProvider
                                 options={{
                                     "client-id":
-                                        "test",
+                                        "AXf1M6G2SEAm6EzkGVVZAJ9Y7ghkpDH7jbXO-I46Dc3wXqtM-BvrcV6pcrOqETn9_BYppoGV0GwAMsil",
                                     components: "buttons",
                                     currency: "EUR",
                                     "disable-funding": "eps,sofort,card"
