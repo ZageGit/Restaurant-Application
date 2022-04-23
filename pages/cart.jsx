@@ -17,7 +17,7 @@ const Cart = () => {
     const [open, setOpen] = useState(false);
     const [cash, setCash] = useState(false);
     const amount = cart.total;
-    const currency = "USD";
+    const currency = "EUR";
     const style = { layout: "vertical" };
 
 
@@ -144,19 +144,32 @@ const Cart = () => {
                     <div className={styles.totalText}>
                         <b className={styles.totalTextTitle}>Total:</b>{cart.total}
                     </div>
-                    <button className={styles.button}>CHECKOUT NOW</button>
-                    <PayPalScriptProvider
-                        options={{
-                            "client-id":
-                                "test",
-                            components: "buttons",
-                            currency: "USD"
-                           
-                        }}
-                    >
-                        <ButtonWrapper currency={currency} showSpinner={false} />
-                    </PayPalScriptProvider>
-                    
+
+                    {open ? (
+                        <div className={styles.paymentMethods}>
+                            <button className={styles.payButton}>CASH ON DELIVERY</button>
+
+
+
+                            <PayPalScriptProvider
+                                options={{
+                                    "client-id":
+                                        "test",
+                                    components: "buttons",
+                                    currency: "EUR",
+                                    "disable-funding": "eps,sofort,card"
+
+                                }}
+                            >
+                                <ButtonWrapper currency={currency} showSpinner={false} />
+                            </PayPalScriptProvider>
+                        </div>
+                    ) : (
+                        <button onClick={() => setOpen(true)} className={styles.button}>CHECKOUT NOW</button>
+
+                    )}
+
+
                 </div>
             </div>
 
