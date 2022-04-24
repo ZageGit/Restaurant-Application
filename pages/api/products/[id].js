@@ -2,12 +2,13 @@ import dbConnect from "../../../util/mongo"
 import Product from "../../../models/Product"
 
 export default async function handler(req, res) {
+    dbConnect();
     const {
         method,
         query: { id },
         cookies
       } = req;
-    dbConnect()
+
     if (method === "GET") {
         try {
             const product = await Product.findById(id);
@@ -29,8 +30,8 @@ export default async function handler(req, res) {
     }
     if (method === "DELETE") {
         try {
-            const product = await Product.create(req.body)
-            res.status(201).json(product)
+            const product = await Product.findByIdAndDelete(id)
+            res.status(201).json("The Product has been deleted.")
         }
         catch (err) {
             res.status(500).json(err);

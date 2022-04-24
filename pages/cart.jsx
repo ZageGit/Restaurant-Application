@@ -7,8 +7,10 @@ import {
     PayPalButtons,
     usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
-import {useRouter} from "next/router"
+import { useRouter } from "next/router"
 import axios from "axios";
+import { reset } from "../redux/cartSlice";
+import OrderDetail from "../components/OrderDetail";
 
 
 
@@ -24,13 +26,13 @@ const Cart = () => {
 
 
     const createOrder = async (data) => {
-        try{
+        try {
             const res = await axios.post("http://localhost:3000/api/orders", data)
-            res.status === 201 && router.push("/orders/"+res.data._id)
-            dispatch(reset);
+            res.status === 201 && router.push("/orders/" + res.data._id)
+            dispatch(reset());
 
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
@@ -121,7 +123,7 @@ const Cart = () => {
                                         />
                                     </div>
                                 </td>
-                                <td>
+                                <td className={styles.td}>
                                     <span className={styles.name}>{product.title}</span>
                                 </td>
                                 <td>
@@ -162,7 +164,7 @@ const Cart = () => {
 
                     {open ? (
                         <div className={styles.paymentMethods}>
-                            <button className={styles.payButton}>CASH ON DELIVERY</button>
+                            <button className={styles.payButton} onClick={() => setCash(true)}>CASH ON DELIVERY</button>
 
 
 
@@ -183,11 +185,11 @@ const Cart = () => {
                         <button onClick={() => setOpen(true)} className={styles.button}>CHECKOUT NOW</button>
 
                     )}
-
-
                 </div>
             </div>
-
+            {cash && (
+                <OrderDetail total={cart.total} createOrder={createOrder}/>
+            )}
         </div>
 
     )
