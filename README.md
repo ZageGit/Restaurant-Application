@@ -13,5 +13,3 @@ The landing page includes a slider with featured products and a Overview of all 
 
 
 Products and orders are stored in MongoDB.
-
-Products and orders can be 
