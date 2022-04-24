@@ -15,6 +15,7 @@ import OrderDetail from "../components/OrderDetail";
 
 
 const Cart = () => {
+    const PAYPAL_ID = process.env.PAYPAL_ID
     const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
@@ -171,7 +172,7 @@ const Cart = () => {
                             <PayPalScriptProvider
                                 options={{
                                     "client-id":
-                                        "AXf1M6G2SEAm6EzkGVVZAJ9Y7ghkpDH7jbXO-I46Dc3wXqtM-BvrcV6pcrOqETn9_BYppoGV0GwAMsil",
+                                    PAYPAL_ID,
                                     components: "buttons",
                                     currency: "EUR",
                                     "disable-funding": "eps,sofort,card"

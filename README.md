@@ -7,3 +7,11 @@
  - Axios
  - Paypal.js
 
+# Landing Page
+
+The landing page includes a slider with featured products and a Overview of all Products.
+
+
+Products and orders are stored in MongoDB.
+
+Products and orders can be 
