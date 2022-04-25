@@ -48,13 +48,13 @@ const Cart = () => {
 
         useEffect(() => {
             dispatch({
-                type: "resetOptions",
-                value: {
-                    ...options,
-                    currency: currency,
-                },
+              type: "resetOptions",
+              value: {
+                ...options,
+                currency: currency,
+              },
             });
-        }, [currency, showSpinner]);
+          }, [currency, showSpinner]);
 
         return (
             <>

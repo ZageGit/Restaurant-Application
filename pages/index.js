@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Featured from '../components/Featured'
 import PizzaList from '../components/PizzaList'
 import styles from '../styles/Home.module.css'
+import dbConnect from '../util/mongo'
 
 
 export default function Home({pizzaList}) {
@@ -22,6 +23,7 @@ export default function Home({pizzaList}) {
 
 
 export const getServerSideProps = async() =>{
+  await dbConnect();
  const res = await axios.get("http://localhost:3000/api/products")
  return{
    props:{
