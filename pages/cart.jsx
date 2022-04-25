@@ -172,7 +172,7 @@ const Cart = () => {
                             <PayPalScriptProvider
                                 options={{
                                     "client-id":
-                                    PAYPAL_ID,
+                                    "AXf1M6G2SEAm6EzkGVVZAJ9Y7ghkpDH7jbXO-I46Dc3wXqtM-BvrcV6pcrOqETn9_BYppoGV0GwAMsil",
                                     components: "buttons",
                                     currency: "EUR",
                                     "disable-funding": "eps,sofort,card"
