@@ -3,24 +3,25 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
-import Product from"../../models/Product"
-import Orders from"../../models/Order"
+import Product from "../../models/Product"
+import Orders from "../../models/Order"
+import dbConnect from '../util/mongo'
 
 const Index = ({ orders, products }) => {
     const [pizzaList, setPizzaList] = useState(products)
     const [orderList, setOrderList] = useState(orders)
-    const status = ["preparing","on the way","delivered" ]
-    const handleStatus = async (id)=>{
-        const item = orderList.filter(order=>order._id === id)[0];
+    const status = ["preparing", "on the way", "delivered"]
+    const handleStatus = async (id) => {
+        const item = orderList.filter(order => order._id === id)[0];
         const currentStatus = item.status;
         try {
-          const res = await axios.put("/api/orders/" + id, {status:currentStatus+1});
+            const res = await axios.put("/api/orders/" + id, { status: currentStatus + 1 });
 
-          setOrderList([
-            res.data,
-            ...orderList.filter((order)=>order._id !== id),
-        ]);
-          
+            setOrderList([
+                res.data,
+                ...orderList.filter((order) => order._id !== id),
+            ]);
+
         }
         catch (err) {
             console.log(err)
@@ -93,17 +94,17 @@ const Index = ({ orders, products }) => {
                             <tr className={styles.trTitle}>
 
                                 <Link href={`/orders/${order._id}`} passHref>
-                                <td className={styles.orderLink}>{order._id.slice(0, 5)}...</td>
+                                    <td className={styles.orderLink}>{order._id.slice(0, 5)}...</td>
                                 </Link>
-                           
+
 
                                 <td>{order.customer}</td>
                                 <td>{order.address}</td>
                                 <td>€{order.total}</td>
-                                <td>{order.method  === 0 ?(<span>cash</span>): (<span>paid</span>)}</td>
+                                <td>{order.method === 0 ? (<span>cash</span>) : (<span>paid</span>)}</td>
                                 <td>{status[order.status]}</td>
                                 <td>
-                                    <button onClick={()=>handleStatus(order._id)}>Next Stage</button>
+                                    <button onClick={() => handleStatus(order._id)}>Next Stage</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -117,23 +118,25 @@ const Index = ({ orders, products }) => {
 }
 
 export const getServerSideProps = async () => {
-    await dbConnect();
-    const products = await Product.find().lean();
-    const orders = await Order.find().lean();
     // const productRes = await axios.get("https://restaurant-application-mzz0lblns-zagegit.vercel.app//api/products");
     // const orderRes = await axios.get("https://restaurant-application-mzz0lblns-zagegit.vercel.app//api/orders")
-    const newProducts = products.map((p)=>{
-        const k = JSON.stringify(p);
-        const l = JSON.parse(k)
-        return l;
-      })
-      const newOrders = orders.map((p)=>{
-        const k = JSON.stringify(p);
-        const l = JSON.parse(k)
-        return l;
-      })
 
-    
+    await dbConnect();
+    const products = await Product.find().lean();
+    const newProducts = products.map((p) => {
+        const k = JSON.stringify(p);
+        const l = JSON.parse(k)
+        return l;
+    })
+
+    const orders = await Order.find().lean();
+    const newOrders = orders.map((p) => {
+        const k = JSON.stringify(p);
+        const l = JSON.parse(k)
+        return l;
+    })
+
+
     return {
         props: {
             orders: newOrders,
