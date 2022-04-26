@@ -28,9 +28,9 @@ export default function Home({pizzaList}) {
 
 
 export const getServerSideProps = async() =>{
-await dbConnect();
 
-await productHandler(Product);
+
+const newProducts = await productHandler();
   // const products = await Product.find().lean();
   // const newProducts = products.map((p)=>{
   //   const k = JSON.stringify(p);
@@ -49,7 +49,7 @@ await productHandler(Product);
   // })
  return{
    props:{
-     pizzaList: newResult,
+     pizzaList: newProducts,
    }
  }
 };
