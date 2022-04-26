@@ -1,11 +1,13 @@
 import styles from "../../styles/Order.module.css";
 import Image from "next/image";
 import axios from "axios";
+import resultHandler from "../../helper/resultHelper";
+import Order from "../../models/Order";
 
 
 
 
-const Order = ({order}) => {
+const SingleOrder = ({order}) => {
     const status = order.status
     const statusClass = (index) => {
         if (index - status < 1) return styles.done
@@ -100,11 +102,13 @@ const Order = ({order}) => {
 
 
 export const getServerSideProps = async ({ params }) => {
-    const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`)
+const result = await resultHandler(Order,params.id)
+
+    // const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`)
     return {
         props: {
-            order: res.data,
+            order: result,
         },
     };
 };
-export default Order
+export default SingleOrder

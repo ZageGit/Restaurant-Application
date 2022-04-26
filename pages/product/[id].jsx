@@ -4,9 +4,11 @@ import { useState } from "react";
 import axios from "axios"
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartSlice";
+import Product from "../../models/Product";
+import resultHandler from "../../helper/resultHelper";
 
 
-const Product = ({ pizza }) => {
+const SingleProduct = ({ pizza }) => {
     const [price, setPrice] = useState(pizza.prices[0]);
     const [size, setSize] = useState(0);
     const [quantity, setQuantity] = useState(1);
@@ -99,11 +101,12 @@ const Product = ({ pizza }) => {
 };
 
 export const getServerSideProps = async ({ params }) => {
-    const res = await axios.get(`http://localhost:3000/api/products/${params.id}`)
+    const result = await resultHandler(Product, params.id);
+    // const res = await axios.get(`http://localhost:3000/api/products/${params.id}`)
     return {
         props: {
-            pizza: res.data,
+            pizza: result,
         },
     };
 };
-export default Product
+export default SingleProduct
