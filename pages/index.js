@@ -7,7 +7,7 @@ import styles from '../styles/Home.module.css'
 import Product from "../models/Product"
 import dbConnect from '../util/mongo'
 import mongoose from "mongoose";
-import productHandler from "../helper/transform"
+import {productHandler} from "../helper/transform"
 
 
 
