@@ -1,4 +1,4 @@
-export default function productHandler(type) {
+export default async function productHandler(type) {
     const result = await type.find().lean();
 
     const newResult = result.map((p) => {
