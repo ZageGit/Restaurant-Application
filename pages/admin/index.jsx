@@ -129,7 +129,7 @@ export const getServerSideProps = async () => {
         return l;
     })
 
-    const orders = await Order.find().lean();
+    const orders = await Orders.find().lean();
     const newOrders = orders.map((p) => {
         const k = JSON.stringify(p);
         const l = JSON.parse(k)
