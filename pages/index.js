@@ -28,7 +28,7 @@ export default function Home({pizzaList}) {
 
 
 export const getServerSideProps = async() =>{
-
+  await dbConnect();
 
 const newProducts = await productHandler();
 console.log(newProducts);
