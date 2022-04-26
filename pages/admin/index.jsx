@@ -3,6 +3,8 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+import Product from"../../models/Product"
+import Orders from"../../models/Order"
 
 const Index = ({ orders, products }) => {
     const [pizzaList, setPizzaList] = useState(products)
@@ -115,13 +117,27 @@ const Index = ({ orders, products }) => {
 }
 
 export const getServerSideProps = async () => {
-    const productRes = await axios.get("https://restaurant-application-mzz0lblns-zagegit.vercel.app//api/products");
-    const orderRes = await axios.get("https://restaurant-application-mzz0lblns-zagegit.vercel.app//api/orders")
+    await dbConnect();
+    const products = await Product.find().lean();
+    const orders = await Order.find().lean();
+    // const productRes = await axios.get("https://restaurant-application-mzz0lblns-zagegit.vercel.app//api/products");
+    // const orderRes = await axios.get("https://restaurant-application-mzz0lblns-zagegit.vercel.app//api/orders")
+    const newProducts = products.map((p)=>{
+        const k = JSON.stringify(p);
+        const l = JSON.parse(k)
+        return l;
+      })
+      const newOrders = orders.map((p)=>{
+        const k = JSON.stringify(p);
+        const l = JSON.parse(k)
+        return l;
+      })
 
+    
     return {
         props: {
-            orders: orderRes.data,
-            products: productRes.data
+            orders: newOrders,
+            products: newProducts
         }
     }
 
