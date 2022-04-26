@@ -13,7 +13,7 @@ import Product from "../models/Product";
 //     return newResult;
 // }
 
-export default async function handler(req, res) {
+export default async function productHandler(req, res) {
     await dbConnect();
     try {  const result = await Product.find().lean();
 
