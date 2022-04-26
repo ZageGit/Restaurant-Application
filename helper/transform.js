@@ -1,4 +1,7 @@
+import dbConnect from "../util/mongo";
+
 export default async function productHandler(type) {
+    await dbConnect();
     const result = await type.find().lean();
 
     const newResult = result.map((p) => {
