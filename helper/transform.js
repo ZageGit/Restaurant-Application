@@ -1,4 +1,5 @@
 import Product from "../models/Product";
+import dbConnect from "../util/mongo";
 
 // export default async function productHandler() {
 //     await dbConnect();
@@ -13,7 +14,7 @@ import Product from "../models/Product";
 // }
 
 export default async function productHandler(req, res) {
-  
+  await dbConnect();
     try {  const result = await Product.find().lean();
 
         const newResult = result.map((p) => {
