@@ -6,6 +6,8 @@ import Link from "next/link";
 import Product from "../../models/Product"
 import Orders from "../../models/Order"
 import dbConnect from '../../util/mongo'
+import resultHandler from "../../helper/resultHelper";
+
 
 const Index = ({ orders, products }) => {
     const [pizzaList, setPizzaList] = useState(products)
@@ -15,7 +17,7 @@ const Index = ({ orders, products }) => {
         const item = orderList.filter(order => order._id === id)[0];
         const currentStatus = item.status;
         try {
-            const res = await axios.put("/api/orders/" + id, { status: currentStatus + 1 });
+            const res = await axios.put("http://localhost:3000/api/orders/" + id, { status: currentStatus + 1 });
 
             setOrderList([
                 res.data,
@@ -30,7 +32,7 @@ const Index = ({ orders, products }) => {
     }
     const handleDelete = async (id) => {
         try {
-            const res = await axios.delete("/api/products/" + id);
+            const res = await axios.delete("http://localhost:3000/api/products/" + id);
             setPizzaList(pizzaList.filter(pizza => pizza._id !== id))
         }
         catch (err) {
@@ -118,29 +120,16 @@ const Index = ({ orders, products }) => {
 }
 
 export const getServerSideProps = async () => {
-    // const productRes = await axios.get("https://restaurant-application-mzz0lblns-zagegit.vercel.app//api/products");
-    // const orderRes = await axios.get("https://restaurant-application-mzz0lblns-zagegit.vercel.app//api/orders")
-
     await dbConnect();
-    const products = await Product.find().lean();
-    const newProducts = products.map((p) => {
-        const k = JSON.stringify(p);
-        const l = JSON.parse(k)
-        return l;
-    })
 
-    const orders = await Orders.find().lean();
-    const newOrders = orders.map((p) => {
-        const k = JSON.stringify(p);
-        const l = JSON.parse(k)
-        return l;
-    })
-
+    const products = await resultHandler(Product);
+    const orders = await resultHandler(Orders);
+    
 
     return {
         props: {
-            orders: newOrders,
-            products: newProducts
+            orders: orders,
+            products: products
         }
     }
 

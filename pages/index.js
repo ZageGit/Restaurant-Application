@@ -6,8 +6,7 @@ import PizzaList from '../components/PizzaList'
 import styles from '../styles/Home.module.css'
 import Product from "../models/Product"
 import dbConnect from '../util/mongo'
-import mongoose from "mongoose";
-import {productHandler} from "../helper/transform"
+import resultHandler from '../helper/resultHelper'
 
 
 
@@ -30,27 +29,11 @@ export default function Home({pizzaList}) {
 export const getServerSideProps = async() =>{
   await dbConnect();
 
-const newProducts = await productHandler();
-console.log(newProducts);
-  // const products = await Product.find().lean();
-  // const newProducts = products.map((p)=>{
-  //   const k = JSON.stringify(p);
-  //   const l = JSON.parse(k)
-  //   return l;
-  // })
-  // .map((p) => {
-  //   return {
-  //     ...p,
-  //     _id: p._id.toString(),
-  //           extraOptions: p.extraOptions.map((x) =>{
-  //             x._id = x._id.toString();
-  //       return x
-  //     })
-  //   }
-  // })
+  const products = await resultHandler(Product);
+
  return{
    props:{
-     pizzaList: newProducts,
+     pizzaList: products,
    }
  }
 };
