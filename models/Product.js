@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const ProductSchema = new mongoose.Schema({
+    
     title: {
         type: String,
         required: true,
@@ -36,5 +37,5 @@ const ProductSchema = new mongoose.Schema({
 },
     { timestamps: true }
 )
-
+ProductSchema.set('toJSON', { getters: true, virtuals: false });
 export default mongoose.models.Product || mongoose.model("Product", ProductSchema);

@@ -12,7 +12,7 @@ const Index = ({ orders, products }) => {
         const item = orderList.filter(order=>order._id === id)[0];
         const currentStatus = item.status;
         try {
-          const res = await axios.put("https://restaurant-application-mzz0lblns-zagegit.vercel.app//api/orders/" + id, {status:currentStatus+1});
+          const res = await axios.put("/api/orders/" + id, {status:currentStatus+1});
 
           setOrderList([
             res.data,
