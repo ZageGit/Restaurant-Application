@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Product from "../../models/Product"
 import Orders from "../../models/Order"
-import dbConnect from '../util/mongo'
+import dbConnect from '../../util/mongo'
 
 const Index = ({ orders, products }) => {
     const [pizzaList, setPizzaList] = useState(products)
