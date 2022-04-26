@@ -31,6 +31,7 @@ export const getServerSideProps = async() =>{
 
 
 const newProducts = await productHandler();
+console.log(newProducts);
   // const products = await Product.find().lean();
   // const newProducts = products.map((p)=>{
   //   const k = JSON.stringify(p);
