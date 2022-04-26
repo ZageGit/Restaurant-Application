@@ -7,6 +7,7 @@ import styles from '../styles/Home.module.css'
 import Product from "../models/Product"
 import dbConnect from '../util/mongo'
 import mongoose from "mongoose";
+import productHandler from "../helper/transform"
 
 
 
@@ -28,14 +29,14 @@ export default function Home({pizzaList}) {
 
 export const getServerSideProps = async() =>{
 await dbConnect();
-  const products = await Product.find().lean();
-  // const jsonProducts =JSON.stringify(products);
 
-  const newProducts = products.map((p)=>{
-    const k = JSON.stringify(p);
-    const l = JSON.parse(k)
-    return l;
-  })
+await productHandler(Product);
+  // const products = await Product.find().lean();
+  // const newProducts = products.map((p)=>{
+  //   const k = JSON.stringify(p);
+  //   const l = JSON.parse(k)
+  //   return l;
+  // })
   // .map((p) => {
   //   return {
   //     ...p,
@@ -48,7 +49,7 @@ await dbConnect();
   // })
  return{
    props:{
-     pizzaList: newProducts,
+     pizzaList: newResult,
    }
  }
 };
