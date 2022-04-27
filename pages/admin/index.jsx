@@ -106,7 +106,7 @@ const Index = ({ orders, products }) => {
                                 <td>{order.method === 0 ? (<span>cash</span>) : (<span>paid</span>)}</td>
                                 <td>{status[order.status]}</td>
                                 <td>
-                                    <button onClick={() => handleStatus(order._id)}>Next Stage</button>
+                                    <button disabled={order.status = 3}onClick={() => handleStatus(order._id)}>Next Stage</button>
                                 </td>
                             </tr>
                         </tbody>
