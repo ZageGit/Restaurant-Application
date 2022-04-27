@@ -28,6 +28,9 @@
   .button:last-child {
     background-color: crimson;
   }
+  .button:disabled{
+    cursor: not-allowed;
+  }
   .orderLink{
       cursor: pointer;
   }
