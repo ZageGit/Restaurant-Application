@@ -109,7 +109,7 @@ const Index = ({ orders, products }) => {
                                     {order.status>=2 && (
                                         <button disabled>finished</button>
                                     )}
-                                    {order.status > 2 && (
+                                    {order.status < 2 && (
                                         <button onClick={() => handleStatus(order._id)}>Next Stage</button>
                                     )}
                                     
