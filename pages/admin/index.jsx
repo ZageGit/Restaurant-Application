@@ -106,7 +106,7 @@ const Index = ({ orders, products }) => {
                                 <td>€{order.total}</td>
                                 <td>{order.method === 0 ? (<span>cash</span>) : (<span>paid</span>)}</td>
                                 <td>{status[order.status]}</td>
-                                <td>{new Date(order.createdAt)}</td>
+                                <td>{order.createdAt}</td>
                                 <td>
                                     {order.status>=2 && (
                                         <button disabled>finished</button>
