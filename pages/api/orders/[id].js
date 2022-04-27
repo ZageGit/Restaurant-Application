@@ -17,11 +17,13 @@ const handler = async (req, res)=>{
     }
     if(method === "PUT"){
         try {
-          console.log(req)
           if(req.body.status < 3){
             const order = await Order.findByIdAndUpdate(id, req.body, {
               new: true,
             });
+            res.status(200).json(order);
+          }else{
+            const order = await Order.findById(id);
             res.status(200).json(order);
           }
           } catch (err) {
