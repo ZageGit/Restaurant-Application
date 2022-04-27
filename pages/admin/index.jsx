@@ -33,10 +33,7 @@ const Index = ({ orders, products }) => {
     const handleOrderDelete = async (id) => {
         try {
             const res = await axios.delete("api/orders/" + id);
-            setOrderList([
-                res.data,
-                ...orderList.filter((order) => order._id !== id),
-            ]);
+            setOrderList(orderList.filter(order => order._id !== id));
         }
         catch (err) {
             console.log(err)
