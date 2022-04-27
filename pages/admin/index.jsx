@@ -88,6 +88,7 @@ const Index = ({ orders, products }) => {
                             <th>Total</th>
                             <th>Payment</th>
                             <th>Status</th>
+                            <th>createdAt</th>
                             <th>Action</th>
                         </tr>
                     </tbody>
@@ -104,6 +105,7 @@ const Index = ({ orders, products }) => {
                                 <td>{order.address}</td>
                                 <td>€{order.total}</td>
                                 <td>{order.method === 0 ? (<span>cash</span>) : (<span>paid</span>)}</td>
+                                <td>{order.createdAt}</td>
                                 <td>{status[order.status]}</td>
                                 <td>
                                     {order.status>=2 && (
