@@ -15,19 +15,18 @@ const handler = async (req, res)=>{
             res.status(500).json(err);
           }
     }
-    if(method === "PUT "){
-      if(req.body.order.status <3){
+    if(method === "PUT"){
         try {
-          const order = await Order.findByIdAndUpdate(id, req.body, {
-            new: true,
-          });
-          res.status(200).json(order);
-        } catch (err) {
-          res.status(500).json(err);
-        }
-
-      }
-       
+          console.log(req)
+          if(req.body.status < 3){
+            const order = await Order.findByIdAndUpdate(id, req.body, {
+              new: true,
+            });
+            res.status(200).json(order);
+          }
+          } catch (err) {
+            res.status(500).json(err);
+          }
     }
     if(method === "DELETE"){}
 };
