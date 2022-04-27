@@ -1,13 +1,14 @@
 import styles from "../styles/OrderDetail.module.css"
 import { useState } from "react";
+import Link from "next/link";
 
 
-const OrderDetail = ({total, createOrder}) => {
+const OrderDetail = ({ total, createOrder }) => {
     const [customer, setCustomer] = useState("");
     const [address, setAdress] = useState("");
     const handleClick = () => {
         createOrder({ customer, address, total, method: 0 });
-      };
+    };
 
     return (
         <div className={styles.container} >
@@ -28,8 +29,13 @@ const OrderDetail = ({total, createOrder}) => {
                 <button className={styles.button} onClick={handleClick}>
                     Order
                 </button>
+                <Link href={`/cart`} passHref>
+                    <button className={styles.button}>
+                        Back to cart
+                    </button>
+                </Link>
             </div>
-        </div>
+        </div >
 
     )
 }

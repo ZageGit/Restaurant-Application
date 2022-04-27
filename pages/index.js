@@ -11,7 +11,6 @@ import resultHandler from '../helper/resultHelper'
 
 
 export default function Home({pizzaList}) {
-  console.log(pizzaList);
   return (
     <div className={styles.container}>
       <Head>

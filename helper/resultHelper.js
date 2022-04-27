@@ -14,3 +14,4 @@ export default async function resultHandler(type, id) {
     }
     return result;
 }
+
